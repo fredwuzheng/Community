@@ -1,12 +1,14 @@
 package com.nowcoder.community.controller;
 
 import com.nowcoder.community.service.AlphaService;
+import com.nowcoder.community.util.CommunityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -142,5 +144,20 @@ public class AlphaController {
 
         return list;
     }
+    @RequestMapping(path="/cookie/set",method = RequestMethod.GET)
+    @ResponseBody
+    public String setCookies(HttpServletResponse response) {
+        //create cookie
+        Cookie cookie = new Cookie("code", CommunityUtil.generateUUID());
+        //setup cookie
+        cookie.setPath("/community/alpha");
+        // set cookie live time, 1hour
+        cookie.setMaxAge(60 * 10);
+        response.addCookie(cookie);
+        return "set cookie";
+    }
+
+
+
 
 }
