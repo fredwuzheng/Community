@@ -110,7 +110,7 @@ public class UserService implements CommunityConstant {
 
     public Map<String,Object> login(String username,String password,int expiredSeconds){
         Map<String,Object> map = new HashMap<>();
-        if(username == null){
+        if(StringUtils.isBlank(username)){
             map.put("usernameMsg", "user name cannot be empty");
             return map;
         }
@@ -120,15 +120,15 @@ public class UserService implements CommunityConstant {
         }
         User user = userMapper.selectByName(username);
         if(user == null){
-            map.put("userMsg", "account does not exist");
+            map.put("usernameMsg", "account does not exist");
             return map;
         }
         if(user.getStatus() == 0){
-            map.put("userstatusMsg", "account is not active");
+            map.put("usernameMsg", "account is not active");
             return map;
         }
-        password  = CommunityUtil.md5(password + user.getSalt());
-        if(!user.getPassword().equals(password)){
+        String passwordSalt  = CommunityUtil.md5(password + user.getSalt());
+        if(!user.getPassword().equals(passwordSalt)){
             map.put("passwordMsg", "password does not match");
             return map;
         }
@@ -141,6 +141,10 @@ public class UserService implements CommunityConstant {
         loginTicketMapper.insertLoginTicket(loginTicket);
         map.put("ticket",loginTicket.getTicket());
         return map;
+    }
+
+    public void logout(String ticket){
+        loginTicketMapper.updateStatus(ticket,1);
     }
 
 

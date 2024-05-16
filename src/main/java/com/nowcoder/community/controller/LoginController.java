@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,30 +97,34 @@ public class LoginController implements CommunityConstant {
     }
 
     @RequestMapping(path ="/login", method = RequestMethod.POST)
-    public String login(String userName, String password, String code, boolean rememberMe,
+    public String login(String username, String password, String code, boolean rememberMe,
                         Model model, HttpSession session, HttpServletResponse respone){
         //check code
-        String kaptcha = (String) session.getAttribute("kapttcha");
+        String kaptcha = (String) session.getAttribute("kaptcha");
         if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
             model.addAttribute("codeMsg","verification code is incorrect");
             return "/site/login";
         }
         //check password
         int expiredSeconds = rememberMe? REMEMBER_EXPIRED_SECONDS: DEFAULT_EXPIRED_SECONDS;
-        Map<String,Object> map = userService.login(userName,password,expiredSeconds);
+        Map<String,Object> map = userService.login(username,password,expiredSeconds);
         if(map.containsKey("ticket")){
             Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
             cookie.setPath(contextPath);
             cookie.setMaxAge(expiredSeconds);
             respone.addCookie(cookie);
-            model.addAttribute("usernameMsg",map.get("usernameMsg"));
-            model.addAttribute("passwordMsg",map.get("passwordMsg"));
-
             return "redirect:/index";
         }
         else{
+            model.addAttribute("usernameMsg",map.get("usernameMsg"));
+            model.addAttribute("passwordMsg",map.get("passwordMsg"));
             return "/site/login";
         }
+    }
 
+    @RequestMapping(path = "logout",method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket){
+        userService.logout(ticket);
+        return "redirect:/login";
     }
 }
