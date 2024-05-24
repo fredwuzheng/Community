@@ -74,7 +74,7 @@
 							<a class="nav-link" href="#">Hot</a>
 						</li>
 					</ul>
-					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal">Publish</button>
+					<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">Publish</button>
 				</div>
 				<!-- 弹出框 -->
 				<div class="modal fade" id="publishModal" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
@@ -89,7 +89,7 @@
 							<div class="modal-body">
 								<form>
 									<div class="form-group">
-										<label for="recipient-name" class="col-form-label">Tittle：</label>
+										<label for="recipient-name" class="col-form-label">Title：</label>
 										<input type="text" class="form-control" id="recipient-name">
 									</div>
 									<div class="form-group">
@@ -127,7 +127,7 @@
 						</a>
 						<div class="media-body">
 							<h6 class="mt-0 mb-3">
-								<a href="#" th:utext="${map.post.title}">备战春招，面试刷题跟他复习，一个月全搞定！</a>
+								<a th:href="@{|/discuss/detail/${map.post.id}|}" th:utext="${map.post.title}">备战春招，面试刷题跟他复习，一个月全搞定！</a>
 								<span class="badge badge-secondary bg-primary" th:if="${map.post.type==1}">Pin</span>
 								<span class="badge badge-secondary bg-danger" th:if="${map.post.status==1}">Hot</span>
 							</h6>
