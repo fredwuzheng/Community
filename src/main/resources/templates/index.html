@@ -30,7 +30,7 @@
 								<a class="nav-link" th:href="@{/index}">Home</a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">
-								<a class="nav-link position-relative" href="site/letter.html">Message<span class="badge badge-danger">12</span></a>
+								<a class="nav-link position-relative" th:href="@{/letter/list}">Message<span class="badge badge-danger" th:text="${letterUnreadCount}" th:if="${letterUnreadCount != 0}">12</span></a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser==null}">
 								<a class="nav-link" th:href="@{/register}">Register</a>
@@ -146,7 +146,7 @@
 				<nav class="mt-5" th:if="${page.rows>0}" th:fragment="pagination">
 					<ul class="pagination justify-content-center">
 						<li class="page-item">
-							<a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+							<a class="page-link" th:href="@{${page.path}(current=1)}">Home</a>
 						</li>
 						<li th:class="|page-item ${page.current==1?'disabled':''}|">
 							<a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">Prev</a></li>
@@ -157,7 +157,7 @@
 							<a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">Next</a>
 						</li>
 						<li class="page-item">
-							<a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+							<a class="page-link" th:href="@{${page.path}(current=${page.total})}">End</a>
 						</li>
 					</ul>
 				</nav>

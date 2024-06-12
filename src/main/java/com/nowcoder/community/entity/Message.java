@@ -2,12 +2,11 @@ package com.nowcoder.community.entity;
 
 import java.util.Date;
 
-public class Comment {
+public class Message {
     private int id;
-    private int userId;
-    private int entityType;
-    private int entityId;
-    private int targetId;
+    private int fromId;
+    private int toId;
+    private String conversationId;
     private String content;
     private int status;
     private Date createTime;
@@ -20,36 +19,28 @@ public class Comment {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getFromId() {
+        return fromId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setFromId(int fromId) {
+        this.fromId = fromId;
     }
 
-    public int getEntityType() {
-        return entityType;
+    public int getToId() {
+        return toId;
     }
 
-    public void setEntityType(int entityType) {
-        this.entityType = entityType;
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 
-    public int getEntityId() {
-        return entityId;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setEntityId(int entityId) {
-        this.entityId = entityId;
-    }
-
-    public int getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(int targetId) {
-        this.targetId = targetId;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getContent() {
@@ -78,15 +69,14 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Message{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", entityType=" + entityType +
-                ", entityId=" + entityId +
-                ", targetId=" + targetId +
+                ", fromId=" + fromId +
+                ", toId=" + toId +
+                ", conversationId='" + conversationId + '\'' +
                 ", content='" + content + '\'' +
                 ", status=" + status +
-                ", createTime=" + createTime +
+                ", create_time=" + createTime +
                 '}';
     }
 }
