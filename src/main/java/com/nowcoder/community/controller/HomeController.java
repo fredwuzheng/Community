@@ -48,4 +48,8 @@ public class HomeController {
         return "/index";
     }
 
+    @RequestMapping(path = "/error",method = RequestMethod.GET)
+    public String getError(){
+        return "/error/500";
+    }
 }
