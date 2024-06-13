@@ -36,14 +36,22 @@ The platform serves as a communication hub for programmers, enabling them to dis
 
 ## Installation
 1. Clone the repository:
-   #####git clone https://github.com/fredwuzheng/Community.git
+   ```bash
+   git clone https://github.com/fredwuzheng/Community.git
+   ```
 2. Navigate to the project directory:
-   ####cd communication
+   ```bash
+   cd communication
+   ```
 
 3. Install dependencies:
-   ####mvn install
+   ```bash
+   mvn install
+   ```
 4. Run the application:
-   ####mvn spring-boot:run
+   ```bash
+   mvn spring-boot:run
+   ```
 
 
 ## Usage
