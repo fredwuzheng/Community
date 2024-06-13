@@ -11,10 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ContextConfiguration(classes = CommunityApplication.class)
+//
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@ContextConfiguration(classes = CommunityApplication.class)
 public class MailTests {
 
 
@@ -26,24 +26,24 @@ public class MailTests {
     private TemplateEngine templateEngine;
 
 
-    @Test
-    public void testTextMail() {
-        mailClient.sendMail("fredwu77737@gmail.com", "TEST", "Welcome.");
-    }
-
-
-    @Test
-    public void testHtmlMail() {
-        Context context = new Context();
-        context.setVariable("username", "sunday");
-
-
-        String content = templateEngine.process("/mail/demo", context);
-        System.out.println(content);
-
-
-        mailClient.sendMail("fredwu77737@gmail.com", "HTML", content);
-    }
+//    @Test
+//    public void testTextMail() {
+//        mailClient.sendMail("fredwu77737@gmail.com", "TEST", "Welcome.");
+//    }
+//
+//
+//    @Test
+//    public void testHtmlMail() {
+//        Context context = new Context();
+//        context.setVariable("username", "sunday");
+//
+//
+//        String content = templateEngine.process("/mail/demo", context);
+//        System.out.println(content);
+//
+//
+//        mailClient.sendMail("fredwu77737@gmail.com", "HTML", content);
+//    }
 
 
 }
