@@ -22,10 +22,10 @@ public class LikeController {
 
     @RequestMapping(path = "/like", method = RequestMethod.POST)
     @ResponseBody
-    public String like(int entityType, int entityId){
+    public String like(int entityType, int entityId,int entityUserId){
         User user = hostHolder.getUsers();
         int userId = user.getId();
-        likeService.like(userId, entityType, entityId);
+        likeService.like(userId, entityType, entityId, entityUserId);
         long likeCount = likeService.findEntityLikeCount( entityType, entityId);
         int likeStatus = likeService.findEntityLikeStatus(userId, entityType, entityId);
 
