@@ -44,4 +44,7 @@ public class CommentService {
         }
         return rows;
     }
+    public Comment findCommentsById(int id){
+        return commentMapper.selectCommentById(id);
+    }
 }
